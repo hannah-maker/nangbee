@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="13.124.54.153" id="f257ab0e-eb50-4559-8f9e-c39b8653f85c" keyPath="$USER_HOME$/.ssh/server_6.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
+      <sshConfig host="15.165.108.8" id="d3716143-36cc-4d7c-8bfc-593599e4cf46" keyPath="$USER_HOME$/.ssh/makeus.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
+    </configs>
+  </component>
+</project>

@@ -1,0 +1,38 @@
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:04:07"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:10:48"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:23:27"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:48:11"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:49:39"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:53:50"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:55:45"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 15:55:55"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:09:06"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:09:17"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:09:25"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:09:36"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:09:44"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 17:15:30"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 17:33:04"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 17:34:48"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 17:39:56"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:12:20"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:12:36"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:13:00"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:13:13"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 18:13:58"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:17"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:26"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:32"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:37"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:43"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:22:48"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 18:24:44"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 18:32:48"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 18:33:22"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 18:33:23"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 19:01:58"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 19:02:56"}
+{"message":"undefined - API Server Start At Port 3001","level":"info","timestamp":"2020-08-08 19:11:01"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-08 19:11:46"}
+{"message":"example non transaction DB Connection error\n: {\"code\":\"ER_ACCESS_DENIED_ERROR\",\"errno\":1045,\"sqlState\":\"28000\",\"sqlMessage\":\"Access denied for user ''@'localhost' (using password: NO)\"}","level":"error","timestamp":"2020-08-08 19:11:58"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-08 19:15:43"}
