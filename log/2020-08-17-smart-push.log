@@ -1,0 +1,12 @@
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 03:25:22"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 04:16:40"}
+{"message":"App - SignUp Query error\n: Unknown column 'startDay' in 'field list'","level":"error","timestamp":"2020-08-17 04:16:59"}
+{"message":"App - SignUp Query error\n: Unknown column 'startDay' in 'field list'","level":"error","timestamp":"2020-08-17 04:17:55"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 12:57:19"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 12:57:49"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 13:43:45"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 13:49:31"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 13:54:10"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 13:57:18"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 13:58:36"}
+{"message":"undefined - API Server Start At Port 3002","level":"info","timestamp":"2020-08-17 14:00:28"}

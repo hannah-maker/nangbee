@@ -3,12 +3,11 @@ const {logger} = require('./winston');
 
 // 데이터베이스 기본정보 입력, 풀생성
 const pool = mysql.createPool({
-    host: '',
-    user: '',
-    password: '',
-    database: ''
+    host: 'makeus.crrwqxfatpvw.ap-northeast-2.rds.amazonaws.com',
+    user: 'hannah',
+    password: 'Hsh0913**',
+    database: 'makeus'
 });
-
 // 트렌젝션 없는 커넥션
 const exampleNonTransaction = async (sql, params) => {
     try {
