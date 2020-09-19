@@ -6,44 +6,24 @@
     "auditLog": "log/.6c1a1f7b9023a40cab0375214d702bb453b1bc33-audit.json",
     "files": [
         {
-            "date": 1596824757095,
-            "name": "log/2020-08-07-smart-push.log",
-            "hash": "0d191fb03bce3fcfce38904810f1375f"
+            "date": 1599815424226,
+            "name": "log/2020-09-11-smart-push.log",
+            "hash": "beae29f071c30fb1923888dc475b4e3d"
         },
         {
-            "date": 1596899047475,
-            "name": "log/2020-08-08-smart-push.log",
-            "hash": "96f1a125c9eb242b27d2c4b48e5472a1"
+            "date": 1599882953476,
+            "name": "log/2020-09-12-smart-push.log",
+            "hash": "c1e95e938e550d4faca5dcb2f37a0666"
         },
         {
-            "date": 1596983488722,
-            "name": "log/2020-08-09-smart-push.log",
-            "hash": "da5154aeb6bdbca911aac9975cec9e07"
+            "date": 1600506599209,
+            "name": "log/2020-09-19-smart-push.log",
+            "hash": "a2a0764531cd0c68c8353fbafc8e451b"
         },
         {
-            "date": 1597385007819,
-            "name": "log/2020-08-14-smart-push.log",
-            "hash": "c175e097f19dd4dec80ec65b0a910d84"
-        },
-        {
-            "date": 1597468176809,
-            "name": "log/2020-08-15-smart-push.log",
-            "hash": "e07d993e19b48c6753081fe95c8408ff"
-        },
-        {
-            "date": 1597538839724,
-            "name": "log/2020-08-16-smart-push.log",
-            "hash": "df01b57ec418651fba4c55247c7d7d60"
-        },
-        {
-            "date": 1597634722010,
-            "name": "log/2020-08-17-smart-push.log",
-            "hash": "2028444e202b8cd0f86f2a1b77d869bd"
-        },
-        {
-            "date": 1597679914382,
-            "name": "log/2020-08-18-smart-push.log",
-            "hash": "3417a11133d97fb0a06f40c329ece1c3"
+            "date": 1600527622731,
+            "name": "log/2020-09-20-smart-push.log",
+            "hash": "b87f3d53fea7b1996d85075180a7e6d5"
         }
     ]
 }

@@ -7,7 +7,7 @@ const jwtMiddleware = (req, res, next) => {
     if(!token) {
         return res.status(403).json({
             isSuccess:false,
-            code: 403,
+            code: 402,
             message: '로그인이 되어 있지 않습니다.'
         });
     }
@@ -27,7 +27,7 @@ const jwtMiddleware = (req, res, next) => {
         res.status(403).json({
             isSuccess:false,
             code: 403,
-            message:"검증 실패"
+            message:"토큰 검증 실패"
         });
     };
 

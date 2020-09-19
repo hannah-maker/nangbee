@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     database: 'makeus'
 });
 // 트렌젝션 없는 커넥션
-const exampleNonTransaction = async (sql, params) => {
+const connectionNonTransaction = async (sql, params) => {
     try {
         const connection = await pool.getConnection(async conn => conn);
         try {
@@ -49,5 +49,5 @@ const exampleTransaction = async (sql, params) => {
 };
 
 module.exports = {
-    pool, exampleNonTransaction
+    pool, connectionNonTransaction
 };

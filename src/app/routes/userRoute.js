@@ -5,7 +5,7 @@ module.exports = function(app){
     app.route('/user').post(user.signUp);
     app.route('/token').post(user.signIn);
 
-
+    app.get('/user', jwtMiddleware, user.getUserProfile);
     app.get('/tokenTest', jwtMiddleware, user.verifyToken); // 토큰 검증이 하고 싶으면 이렇게 앞에 다가 달면 됨.. get에 app을 달면 인식을 못한다.
     // app.get('/decodeToken', jwtMiddleware, user.decodeJwtToken);
     // app.get('/tokenTest', jwtMiddleware, user.verifyToken); // 토큰 검증이 하고 싶으면 이렇게 앞에 다가 달면 됨.. get에 app을 달면 인식을 못한다.

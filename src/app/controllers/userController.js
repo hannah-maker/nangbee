@@ -1,4 +1,4 @@
-const { pool, exampleNonTransaction } = require('../../../config/database');
+const { pool, connectionNonTransaction } = require('../../../config/database');
 const { logger } = require('../../../config/winston');
 
 const jwt = require('jsonwebtoken');
@@ -40,19 +40,19 @@ exports.signUp = async function (req, res) {
     if (nickName.length > 20) return res.json({
         isSuccess: false,
         code: 307,
-        message: "닉네임은 최대 20자리를 입력해주세요."
+        message: "닉네임은 20자리 미만으로 입력해주세요."
     });
 
     if (!wasteAmount) return res.json({ isSuccess: false, code: 308, message: "목표 낭비 금액을 입력해주세요." });
     if (wasteAmount.length > 50) return res.json({
         isSuccess: false,
         code: 309,
-        message: "50자리 이하로 입력해주세요. "
+        message: "금액을 50자리 이하로 입력해주세요. "
     });
     if (!regexWateAmount.test(wasteAmount)) return res.json({ isSuccess: false, code: 310, message: "숫자로만 금액을 입력해주세요." });
 
     if (!startDay) return res.json({ isSuccess: false, code: 311, message: "시작 날짜를 입력해주세요." });
-    if (!regexDay.test(startDay)) return res.json({ isSuccess: false, code: 312, message: "날짜로 입력해 주세요" });
+    if (!regexDay.test(startDay)) return res.json({ isSuccess: false, code: 312, message: "시작 날짜를 날짜로 입력해 주세요" });
 
     try {
         const connection = await pool.getConnection(async conn => conn);
@@ -70,7 +70,7 @@ exports.signUp = async function (req, res) {
                 connection.release();
                 return res.json({
                     isSuccess: false,
-                    code: 308,
+                    code: 313,
                     message: "중복된 이메일입니다."
                 });
             }
@@ -147,6 +147,7 @@ exports.signIn = async function (req, res) {
         try {
             const selectUserInfoQuery = `
                 SELECT email, isDeleted, pswd
+                
                 FROM User
                 WHERE email = ?;
                 `;
@@ -177,7 +178,7 @@ exports.signIn = async function (req, res) {
                 return res.json({
                     isSuccess: false,
                     code: 312,
-                    message: "탈퇴된 계정입니다. 고객센터에 문의해주세요."
+                    message: "탈퇴된 계정입니다. 관리자에게 문의해주세요."
                 });
             }
             // } else if (userInfoRows[0].idDeleted === "Y") {
@@ -235,7 +236,7 @@ exports.getUser = async function (req, res) {
         if (userInfoRows.length < 1) {
             connection.release();
             return res.json({
-                isSuccess: false, 
+                isSuccess: false,
                 code: 301,
                 message: "회원이 없습니다."
             });
@@ -258,11 +259,10 @@ exports.getUser = async function (req, res) {
 exports.getModuleUser = async function (req, res) {
     try {
         const selectUserInfoQuery = `
-            SELECT userName, phone, address 
-            FROM userInfo
-            WHERE userInfoIdx = ? ;
+            SELECT id, pw
+            FROM User;
             `;
-        const userInfoRows = await exampleNonTransaction(selectUserInfoQuery, 1);
+        const userInfoRows = await exampleNonTransaction(selectUserInfoQuery);
         if (userInfoRows.length < 1) {
             return res.send(utils.successFalse(301, "회원이 없습니다."))
         }
@@ -319,13 +319,22 @@ exports.verifyToken = async function (req, res) {
     }
 };
 
-// exports.decodeJwtToken = async function (req, res) {
-//     try{
-//         var decoded = jwt_decode(token);
-//         console.log(decoded);
-//     }
-//     catch(err){
-//         return false;
-//     }
-// };
+exports.getUserProfile = async function (req, res) {
+    const token = req.headers['x-access-token'] || req.query.token;
+    const decoded = jwt.verify(token, secret_config.jwtsecret);
+    const email = decoded.email;
+
+    try {
+        const selectUserQuery = `SELECT email, wasteAmount, nickName, startDay, wasteAmount FROM User WHERE email = ? and isDeleted = 'N'`
+
+        const selectUserInfoRow = await connectionNonTransaction(selectUserQuery, [email]);
+        if(selectUserInfoRow.length < 1){
+            res.send(utils.successFalse(300, "사용자 정보가 없습니다. 관리자에게 문의해주세요."));
+        }
+        return res.send(utils.successTrue(200, "사용자 프로필 조회 성공", selectUserInfoRow[0]))
+    } catch (err) {
+        logger.error(`App - UsersList DB Connection error\n: ${JSON.stringify(err)}`);
+        return res.send(utils.successFalse(400, "DB 연결 실패"));
+    }
+};
 
