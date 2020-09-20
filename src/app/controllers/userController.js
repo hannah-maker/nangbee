@@ -8,7 +8,7 @@ const secret_config = require('../../../config/secret');
 const utils = require('../../../config/resModule');
 const jwtDecode = require('jwt-decode');
 // var decoded = jwt_decode(token);
-const regexDay = /^[1-9]{1}$|^[1-3]{1}[0-1]{1}$|^10$/;
+// const regexDay = /^[1-9]{1}$|^[1-3]{1}[0-1]{1}$|^10$/;
 const regexWateAmount = /^[0-9]+$/;
 
 /**
@@ -52,7 +52,7 @@ exports.signUp = async function (req, res) {
     if (!regexWateAmount.test(wasteAmount)) return res.json({ isSuccess: false, code: 310, message: "숫자로만 금액을 입력해주세요." });
 
     if (!startDay) return res.json({ isSuccess: false, code: 311, message: "시작 날짜를 입력해주세요." });
-    if (!regexDay.test(startDay)) return res.json({ isSuccess: false, code: 312, message: "시작 날짜를 날짜로 입력해 주세요" });
+    // if (!regexDay.test(startDay)) return res.json({ isSuccess: false, code: 312, message: "시작 날짜를 날짜로 입력해 주세요" });
 
     try {
         const connection = await pool.getConnection(async conn => conn);
