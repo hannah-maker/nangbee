@@ -17,7 +17,7 @@ const regexWateAmount = /^[0-9]+$/;
  */
 exports.signUp = async function (req, res) {
     const {
-        email, password, nickName, wasteAmount, startDay
+        email, password, nickName, wasteAmount, startDay, character
     } = req.body;
 
     if (!email) return res.json({ isSuccess: false, code: 301, message: "이메일을 입력해주세요." });
@@ -52,6 +52,13 @@ exports.signUp = async function (req, res) {
     if (!regexWateAmount.test(wasteAmount)) return res.json({ isSuccess: false, code: 310, message: "숫자로만 금액을 입력해주세요." });
 
     if (!startDay) return res.json({ isSuccess: false, code: 311, message: "시작 날짜를 입력해주세요." });
+
+    if (!character) return res.json({ isSuccess: false, code: 315, message: "캐릭터 설정을 입력해주세요." });
+    if (character.length > 30) return res.json({
+        isSuccess: false,
+        code: 316,
+        message: "캐릭터 설정 30자리 미만으로 입력해주세요."
+    });
     // if (!regexDay.test(startDay)) return res.json({ isSuccess: false, code: 312, message: "시작 날짜를 날짜로 입력해 주세요" });
 
     try {
@@ -97,10 +104,10 @@ exports.signUp = async function (req, res) {
             const hashedPassword = await crypto.createHash('sha512').update(password).digest('hex');
 
             const insertUserQuery = `
-                INSERT INTO User(email, pswd, nickName, wasteAmount, startDay)
-                VALUES (?, ?, ?, ?, ?);
+                INSERT INTO User(email, pswd, nickName, wasteAmount, startDay, \`character\`)
+                VALUES (?, ?, ?, ?, ?, ?);
                     `;
-            const insertUserParams = [email, hashedPassword, nickName, wasteAmount, startDay]; // 두 값을 넣을 때면 이런식으로 나열
+            const insertUserParams = [email, hashedPassword, nickName, wasteAmount, startDay, character]; // 두 값을 넣을 때면 이런식으로 나열
             await connection.query(insertUserQuery, insertUserParams);
 
             await connection.commit(); // COMMIT
