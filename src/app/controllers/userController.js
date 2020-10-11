@@ -82,24 +82,6 @@ exports.signUp = async function (req, res) {
                 });
             }
 
-            // 닉네임 중복 확인
-            // const selectNicknameQuery = `
-            //     SELECT email, nickname
-            //     FROM UserInfo
-            //     WHERE nickname = ?;
-            //     `;
-            // const selectNicknameParams = [nickname];
-            // const [nicknameRows] = await connection.query(selectNicknameQuery, selectNicknameParams);
-            //
-            // if (nicknameRows.length > 0) {
-            //     connection.release();
-            //     return res.json({
-            //         isSuccess: false,
-            //         code: 309,
-            //         message: "중복된 닉네임입니다."
-            //     });
-            // }
-
             await connection.beginTransaction(); // START TRANSACTION
             const hashedPassword = await crypto.createHash('sha512').update(password).digest('hex');
 
@@ -332,7 +314,7 @@ exports.getUserProfile = async function (req, res) {
     const email = decoded.email;
 
     try {
-        const selectUserQuery = `SELECT email, wasteAmount, nickName, startDay, wasteAmount FROM User WHERE email = ? and isDeleted = 'N'`
+        const selectUserQuery = `SELECT email, wasteAmount, nickName, startDay, wasteAmount, \`character\` FROM User WHERE email = ? and isDeleted = 'N'`
 
         const selectUserInfoRow = await connectionNonTransaction(selectUserQuery, [email]);
         if(selectUserInfoRow.length < 1){
