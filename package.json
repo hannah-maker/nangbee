@@ -8,10 +8,6 @@
     "dev": "NODE_ENV=development node index.js",
     "prod": "NODE_ENV=production node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.com:softsquared/template/api-server-node.git"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
