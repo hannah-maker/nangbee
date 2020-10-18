@@ -308,6 +308,10 @@ exports.verifyToken = async function (req, res) {
     }
 };
 
+/**
+ update : 2020.09
+ 사용자 프로필 조회 api
+ **/
 exports.getUserProfile = async function (req, res) {
     const token = req.headers['x-access-token'] || req.query.token;
     const decoded = jwt.verify(token, secret_config.jwtsecret);
@@ -317,13 +321,41 @@ exports.getUserProfile = async function (req, res) {
         const selectUserQuery = `SELECT email, wasteAmount, nickName, startDay, wasteAmount, \`character\` FROM User WHERE email = ? and isDeleted = 'N'`
 
         const selectUserInfoRow = await connectionNonTransaction(selectUserQuery, [email]);
+
         if(selectUserInfoRow.length < 1){
-            res.send(utils.successFalse(300, "사용자 정보가 없습니다. 관리자에게 문의해주세요."));
+            return res.send(utils.successFalse(300, "사용자 정보가 없습니다. 관리자에게 문의해주세요."));
         }
         return res.send(utils.successTrue(200, "사용자 프로필 조회 성공", selectUserInfoRow[0]))
     } catch (err) {
-        logger.error(`App - UsersList DB Connection error\n: ${JSON.stringify(err)}`);
+        logger.error(`App - getUserProfile DB Connection error\n: ${JSON.stringify(err)}`);
         return res.send(utils.successFalse(400, "DB 연결 실패"));
     }
 };
 
+
+/**
+ update : 2020.10
+ 사용자 탈퇴 api
+ **/
+exports.deleteUser = async function (req, res) {
+    const token = req.headers['x-access-token'] || req.query.token;
+    const decoded = jwt.verify(token, secret_config.jwtsecret);
+    const email = decoded.email;
+
+    try {
+        const existUserRows = await connectionNonTransaction(
+            `SELECT email FROM User
+            WHERE email = ? and isDeleted = 'N';`,[email]
+        );
+        if (existUserRows.length < 1) { // 사용자가 존재하지 않는 경우
+            return res.send(utils.successFalse(301, "존재하지 않거나 삭제된 사용자 입니다."));
+        }
+        const deleteUserRows = await connectionNonTransaction(
+            `UPDATE User SET isDeleted = 'Y' WHERE email = ?;`, [email]
+        );
+        return res.send(utils.successTrue(200, "사용자 탈퇴 성공."))
+    } catch (err) {
+        logger.error(`App - UsersList DB Connection error\n: ${JSON.stringify(err)}`);
+        return res.send(utils.successFalse(400, "DB 연결 실패"));
+    }
+}
