@@ -14,33 +14,77 @@ const regexNum = /^[0-9]*$/;
 
 
 /**
- update : 2020.09.09
+ update : 2020.10
  01.항목 추가 api / addItem
  */
-exports.addItem = async function (req, res) {
+
+exports.addItem = async function (req, res) { // 배열 형식으로 수정.
     const token = req.headers['x-access-token'] || req.query.token;
     const decoded = jwt.verify(token, secret_config.jwtsecret);
     const email = decoded.email;
     const {
-        name, amount
+        name, amount, itemList
     } = req.body;
 
-    if (!name) return res.json({ isSuccess: false, code: 100, message: "항목명을 입력해주세요." });
-    if (!amount) return res.json({ isSuccess: false, code: 101, message: "금액을 입력해주세요." });
-    if (!regexNum.test(amount)) return res.json({ isSuccess: false, code: 102, message: "금액을 숫자로만 입력해주세요." });
+    if(null!= name) {
+        if (!name) return res.json({isSuccess: false, code: 100, message: "항목명을 입력해주세요."});
+        if (!amount) return res.json({isSuccess: false, code: 101, message: "금액을 입력해주세요."});
+        if (!regexNum.test(amount)) return res.json({isSuccess: false, code: 102, message: "금액을 숫자로만 입력해주세요."});
 
-    if (name.length > 30) return res.json({
-        isSuccess: false,
-        code: 103,
-        message: "항목명을 30자리 미만으로 입력해주세요."
-    });
-    if (amount.length > 30) return res.json({
-        isSuccess: false,
-        code: 104,
-        message: "금액을 30자리 미만으로 입력해주세요."
-    });
+        if (name.length > 30) return res.json({
+            isSuccess: false,
+            code: 103,
+            message: "항목명을 30자리 미만으로 입력해주세요."
+        });
+        if (amount.length > 30) return res.json({
+            isSuccess: false,
+            code: 104,
+            message: "금액을 30자리 미만으로 입력해주세요."
+        });
+    }
+
+
+    if(null != itemList){
+        for (let i = 0; i < itemList.length; i++) { //cartNo 개수만큼 orderNo insert
+            if (!itemList[i].name) return res.json({isSuccess: false, code: 100, message: "항목명을 입력해주세요."});
+            if (!itemList[i].amount) return res.json({isSuccess: false, code: 101, message: "금액을 입력해주세요."});
+            if (!regexNum.test(itemList[i].amount)) return res.json({isSuccess: false, code: 102, message: "금액을 숫자로만 입력해주세요."});
+
+            if (itemList[i].name.length > 30) return res.json({
+                isSuccess: false,
+                code: 103,
+                message: "항목명을 30자리 미만으로 입력해주세요."
+            });
+            if (itemList[i].amount.length > 30) return res.json({
+                isSuccess: false,
+                code: 104,
+                message: "금액을 30자리 미만으로 입력해주세요."
+            });
+        }
+    }
 
     try {
+        if(itemList){
+            const addItemsQuery = 'INSERT INTO WasteItem (userId, name, amount) VALUES (?,?,?);'
+
+            for (let i = 0; i < itemList.length; i++){
+                let addItemsParams = [email, itemList[i].name, itemList[i].amount];
+                const addIteemRows = await connectionNonTransaction(
+                   addItemsQuery, addItemsParams
+               )
+            }
+            // const selectLatestRows2 = await connectionNonTransaction(
+            //     `SELECT no FROM WasteItem ORDER BY NO DESC LIMIT 1;`
+            // )
+            return res.json({
+                isSuccess: true,
+                code: 200,
+                message: "낭비 항목 추가 성공",
+                // itemNo: selectLatestRows2[0].no
+            })
+
+        }
+
         const insertItemQuery = `INSERT INTO WasteItem (userId, name, amount) VALUES (?,?,?);`
         const rows = await connectionNonTransaction(
             `INSERT INTO WasteItem (userId, name, amount) VALUES (?,?,?);`, [email, name, amount]
@@ -59,6 +103,7 @@ exports.addItem = async function (req, res) {
         return res.send(utils.successFalse(400, "DB 연결 실패"));
     }
 }
+
 
 /**
  update : 2020.09.09
