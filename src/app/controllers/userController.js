@@ -7,6 +7,8 @@ const crypto = require('crypto');
 const secret_config = require('../../../config/secret');
 const utils = require('../../../config/resModule');
 const jwtDecode = require('jwt-decode');
+const mail = require("../../../config/nodeMailer");
+
 // var decoded = jwt_decode(token);
 // const regexDay = /^[1-9]{1}$|^[1-3]{1}[0-1]{1}$|^10$/;
 const regexWateAmount = /^[0-9]+$/;
@@ -136,7 +138,6 @@ exports.signIn = async function (req, res) {
         try {
             const selectUserInfoQuery = `
                 SELECT email, isDeleted, pswd
-                
                 FROM User
                 WHERE email = ?;
                 `;
@@ -359,3 +360,50 @@ exports.deleteUser = async function (req, res) {
         return res.send(utils.successFalse(400, "DB 연결 실패"));
     }
 }
+
+/**
+ update : 2020.10
+ 사용자 이메일로 비밀번호 전송**/
+exports.mailerSendPw = async function (req, res) {
+    const token = req.headers['x-access-token'] || req.query.token;
+    const decoded = jwt.verify(token, secret_config.jwtsecret);
+    const email = decoded.email;
+
+    try {
+        var arr = "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,~,!,@,#,$,%,^,&".split(",");
+        var randomPw = createCode(arr, 8);
+//비밀번호 랜덤 함수
+        function createCode(objArr, iLength) {
+            var arr = objArr;
+            var randomStr = "";
+            for (var j=0; j<iLength; j++) {
+                randomStr += arr[Math.floor(Math.random()*arr.length)];
+            }
+            return randomStr
+        }
+
+        console.log(randomPw);
+        const hashedPassword = await crypto.createHash('sha512').update(randomPw).digest('hex');
+        console.log(hashedPassword);
+
+        const updatePwQuery = 'update User set pswd = ? WHERE email = ?;'
+        await connectionNonTransaction(
+            updatePwQuery ,[hashedPassword, email]
+        );
+
+        const emailId = 'mpmd37@gmail.com'
+
+        let emailParam = {
+
+            toEmail : emailId
+            ,subject  : "냥비요정에서 새로운 비밀번호를 전송했습니다."
+            ,text : "새로운 비밀번호:  " + randomPw
+        };
+        mail.sendGmail(emailParam);
+
+        return res.send(utils.successTrue(200, "이메일 발송 성공"))
+    } catch (err) {
+        logger.error(`App - send reset pw DB Connection error\n: ${JSON.stringify(err)}`);
+        return res.send(utils.successFalse(400, "DB 연결 실패"));
+    }
+};

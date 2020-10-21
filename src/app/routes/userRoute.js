@@ -7,6 +7,7 @@ module.exports = function(app){
 
     app.delete('/user', jwtMiddleware, user.deleteUser); // 사용자 삭제 api
     app.get('/user', jwtMiddleware, user.getUserProfile); // 프로필 조회 api
+    app.post('/reset-pw', jwtMiddleware, user.mailerSendPw); // 
 
     app.get('/tokenTest', jwtMiddleware, user.verifyToken); // 토큰 검증이 하고 싶으면 이렇게 앞에 다가 달면 됨.. get에 app을 달면 인식을 못한다.
     // app.get('/decodeToken', jwtMiddleware, user.decodeJwtToken);
