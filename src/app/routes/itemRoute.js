@@ -6,4 +6,5 @@ module.exports = function(app){
     app.get('/item' , jwtMiddleware, item.getItems); // 아이템 조회 API
     app.delete('/item' , jwtMiddleware, item.deleteItem); // 아이템 삭제 API
     app.patch('/item' , jwtMiddleware, item.updateItem); // 아이템 수정 API
+    app.get('/ranking' , jwtMiddleware, item.getRanking); // 아이템 수정 API
 }

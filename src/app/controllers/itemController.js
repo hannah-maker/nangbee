@@ -214,3 +214,62 @@ exports.deleteItem = async function (req, res) {
         return res.send(utils.successFalse(400, "DB 연결 실패"));
     }
 }
+
+
+/**
+ update : 2020.09.10
+ 랭킹 조회 api/ getRanking
+ */
+exports.getRanking = async function (req, res) {
+    const token = req.headers['x-access-token'] || req.query.token;
+    const decoded = jwt.verify(token, secret_config.jwtsecret);
+    const email = decoded.email;
+
+    const {
+        period
+    } = req.query;
+
+    if (!period) return res.json({ isSuccess: false, code: 101, message: "조회를 원하는 기간을 선택해 주세요." })
+
+    try {
+        if(period == "day"){
+            const selectTodayRankingQuery = `SELECT userId, sum(amount) as totalAmount from WasteItem
+WHERE updatedAt
+BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()
+GROUP BY userId
+ORDER BY totalAmount DESC LIMIT 30;`
+            const selectTodayRankingRows = await connectionNonTransaction(selectTodayRankingQuery)
+            if(selectTodayRankingRows.length < 1){
+                res.send(utils.successFalse(300, "오늘 사용자 데이터가 없습니다."));
+            }
+            return res.send(utils.successTrue(200, "오늘의 낭비 랭킹 조회 성공", selectTodayRankingRows))
+        }
+        if(period == "week"){
+            const selectWeekRankingQuery = `SELECT userId, sum(amount) as totalAmount from WasteItem
+WHERE updatedAt >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY
+AND updatedAt < curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY
+GROUP BY userId
+ORDER BY totalAmount DESC LIMIT 30;`
+            const selectWeekRankingRows = await connectionNonTransaction(selectWeekRankingQuery)
+            if(selectWeekRankingRows.length < 1){
+                res.send(utils.successFalse(301, "이번주 사용자 데이터가 없습니다."));
+            }
+            return res.send(utils.successTrue(200, "이번주 낭비 랭킹 조회 성공", selectWeekRankingRows))
+        }
+        if(period == "month"){
+            const selectMonthRankingQuery = `SELECT userId, sum(amount) as totalAmount from WasteItem
+WHERE updatedAt
+BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW()
+GROUP BY userId
+ORDER BY totalAmount DESC LIMIT 30;`
+            const selectMonthRankingRows = await connectionNonTransaction(selectMonthRankingQuery)
+            if(selectMonthRankingRows.length < 1){
+                res.send(utils.successFalse(302, "이번달 사용자 데이터가 없습니다."));
+            }
+            return res.send(utils.successTrue(200, "이번달 낭비 랭킹 조회 성공", selectMonthRankingRows))
+        }
+    } catch (err) {
+        logger.error(`App - UsersList DB Connection error\n: ${JSON.stringify(err)}`);
+        return res.send(utils.successFalse(400, "DB 연결 실패"));
+    }
+}
