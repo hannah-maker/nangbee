@@ -12,7 +12,7 @@ const mailSender = {
             ,requireTLS : true
             , auth: {
                 user: 'mpmd37@gmail.com'
-                ,pass: 'Kjoy2357**'
+                ,pass: ''
             }
         });
         // 메일 옵션
