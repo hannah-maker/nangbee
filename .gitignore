@@ -99,4 +99,9 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/phpstorm,composer
+node_modules/
+jspm_packages/
 
+# Add more
+database.js
+secret.js
