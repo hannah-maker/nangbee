@@ -13,7 +13,6 @@ module.exports = function(app){
     // app.get('/decodeToken', jwtMiddleware, user.decodeJwtToken);
     // app.get('/tokenTest', jwtMiddleware, user.verifyToken); // 토큰 검증이 하고 싶으면 이렇게 앞에 다가 달면 됨.. get에 app을 달면 인식을 못한다.
     // app.post('/signin', user.signIn); //
-//app을 붙이는게 무슨 차이인거냐 왜안돼
     // app.get('app/testToken', user.verifyToken);
 
     // app.route('/app/jwtt').post(user.verifyToken); //토큰 검증 post
