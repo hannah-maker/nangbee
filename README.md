@@ -13,18 +13,17 @@
 │   ├── nodeMailer.js        # 메일 발송 모듈
 │   ├── resMoudule.js        # response module
 │   ├── winston.js           # logger 생성 
-├── pulbic                          
+├── pulbic                   # 이미지 파일  
 ├── src                          
-│   ├── app     # app
-│   ├───├──controllers       #로직 처리 
-│   ├───├───|───itemController.js #항목 추가, 삭제, 수정 처리 
-│   ├───├───|───userController.js #사용자 가입, 로그인 
-│   ├───├───|───testController.js #테스트 
-│   ├───├──routes            #라우트 
-│   ├───├───|───itemRoute.js      #아이템 
-│   ├───├───|───userRoute.js      #사용자 
-│   ├───├───|───testRoute.js      #테스트 
-├── drawable                        # 이미지파일
+│   ├── app                  # app
+│   ├───├──controllers       # 로직 처리 
+│   ├───├───|───itemController.js # 항목 추가, 삭제, 수정 처리 
+│   ├───├───|───userController.js # 사용자 가입, 로그인 
+│   ├───├───|───testController.js # 테스트 
+│   ├───├──routes            # 라우트 
+│   ├───├───|───itemRoute.js      # 아이템 
+│   ├───├───|───userRoute.js      # 사용자 
+│   ├───├───|───testRoute.js      # 테스트 
 ├── .gitignore                     
 ├── package-lock.json                  
 ├── package.json            	 
